@@ -3,6 +3,8 @@ const enterOpe = document.querySelector('#opeBtn');
 const getResult = document.getElementById('equBtn');
 const cleerBtn = document.getElementById('clearBtn');
 
+const displayScreen = document.getElementById('display');
+
 let curNum = '';
 let operator = '';
 let preNum = '';
@@ -46,27 +48,32 @@ function calculate(){
         }
     };
 
-function roundNum(num){}
 
 function updatePreNum(){
 if(curNum){
     if(!operator||!preNum){
-    preNum = (1*curNum).toFixed(3)*10/10;
+    preNum = (1*curNum).toFixed(6)*10/10;
     }else{
-    preNum= calculate().toFixed(3)*10/10;
+    preNum= calculate().toFixed(6)*10/10;
     };
 };}
 
-function display(num1,operator,num2){
+
+
+function display(string){
+    displayScreen.innerText = string;
+}
+
+function onScreen(num1,operator,num2){
     if(num2){
         if(!num1||!operator){
             return  num2;
         }else{
-            return `${1*num1}${operator}${1*num2}`;
+            return `${num1}${operator}${num2}`;
         }
     }else{
         if(num1){
-            return `${1*num1}${operator}`;
+            return `${num1}${operator}`;
         }else{
             return num1;
         }
@@ -76,7 +83,8 @@ function display(num1,operator,num2){
 enterNum.addEventListener('click',function(){
 let n = prompt('number');
 updateCurNum(n);
-console.log(display(preNum,operator,curNum));
+console.log(preNum,operator,curNum);
+display(onScreen(preNum,operator,curNum));
 });
 
 enterOpe.addEventListener('click',function(){
@@ -84,20 +92,22 @@ let n = prompt('operator');
 updatePreNum();
 updateOpe(n);
 curNum = '';
-console.log(display(preNum,operator,curNum));
+console.log(preNum,operator,curNum);
+display(onScreen(preNum,operator,curNum));
 })
 
 getResult.addEventListener('click',function(){
 updatePreNum();
-alert(preNum);
 operator = '';
 curNum = '';
-console.log(display(preNum,operator,curNum));
+console.log(preNum,operator,curNum);
+display(onScreen(preNum,operator,curNum));
 })
 
 clearBtn.addEventListener('click', function(){
 preNum = '';
 operator = '';
 curNum = '';
-console.log(display(preNum,operator,curNum));
+console.log(preNum,operator,curNum);
+display(onScreen(preNum,operator,curNum));
 })
