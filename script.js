@@ -56,10 +56,11 @@ function updateCurNum(input){
         }
 
     }else{
-        if(curNum){
-            curNum = `${curNum}${input}`;
-        }else{
+        if(curNum === '0'||curNum ===""){
             curNum = input;
+        }
+        else{
+            curNum = `${curNum}${input}`;
         }
     }  
 };
