@@ -4,7 +4,7 @@ const opeBtn = document.querySelectorAll('.operator');
 const getResult = document.getElementById('equal');
 const clearBtn = document.getElementById('clear');
 
-let curNum = '';
+let curNum = '0';
 let operator = '';
 let preNum = '';
 
@@ -39,13 +39,14 @@ getResult.addEventListener('click',function(){
 clearBtn.addEventListener('click', function(){
     preNum = '';
     operator = '';
-    curNum = '';
+    curNum = '0'; 
+    displayScreen.innerText = 0;
     console.log(preNum,operator,curNum);
-    display(onScreen(preNum,operator,curNum));
+
     })
 
 function updateCurNum(input){
-    if(curNum.length >=10){
+    if(curNum.length >=12){
         return;
     }
     if (input === '.'){
@@ -85,22 +86,35 @@ function calculate(){
 
 function updatePreNum(){
 if(curNum){
-    if(!operator||!preNum){
-    preNum = (100000*curNum).toFixed()/100000;
+    if(!preNum&&preNum !== 0||!operator){
+        preNum = (100000*curNum).toFixed()/100000;       
     }else{
-    preNum= (calculate()*100000).toFixed()/100000;
+        preNum= (calculate()*100000).toFixed()/100000;
     };
 };}
 
 
 
 function display(string){
-    displayScreen.innerText = string;
+    displayScreen.innerText = string;   
+    console.log(string.length); 
+    if (string.length<=10||!string.length){
+        displayScreen.style.fontSize ="70px";
+        displayScreen.style.lineHeight ="120px";
+        displayScreen.style.wordBreak ="break-all";
+    }else if(string.length<=14){
+        displayScreen.style.fontSize ="55px";
+        displayScreen.style.lineHeight ="120px";
+        displayScreen.style.wordBreak ="break-all";
+    }else{
+        displayScreen.style.lineHeight ="60px";
+        displayScreen.style.wordBreak ="break-all";
+    }
 }
 
 function onScreen(num1,operator,num2){
     if(num2){
-        if(!num1||!operator){
+        if(!num1&&num1!==0||!operator){
             return  num2;
         }else{
             return `${num1}${operator}${num2}`;
