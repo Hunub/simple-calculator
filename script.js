@@ -1,15 +1,53 @@
-const enterNum = document.querySelector('#numBtn');
-const enterOpe = document.querySelector('#opeBtn');
-const getResult = document.getElementById('equBtn');
-const cleerBtn = document.getElementById('clearBtn');
-
 const displayScreen = document.getElementById('display');
+const numBtn = document.querySelectorAll('.number');
+const opeBtn = document.querySelectorAll('.operator');
+const getResult = document.getElementById('equal');
+const clearBtn = document.getElementById('clear');
 
 let curNum = '';
 let operator = '';
 let preNum = '';
 
+
+for(let i = 0; i<numBtn.length; i++){
+    numBtn[i].addEventListener('click',function(e){
+        let n = e.target.textContent;
+        updateCurNum(n);
+        console.log(preNum,operator,curNum);
+        display(onScreen(preNum,operator,curNum));
+    });
+};
+
+for(let i = 0; i<opeBtn.length; i++){
+    opeBtn[i].addEventListener('click',(e)=>{
+        updatePreNum();
+        operator = e.target.textContent;
+        curNum = '';
+        console.log(preNum,operator,curNum);
+        display(onScreen(preNum,operator,curNum));
+    });
+}
+
+getResult.addEventListener('click',function(){
+    updatePreNum();
+    operator = '';
+    curNum = '';
+    console.log(preNum,operator,curNum);
+    display(onScreen(preNum,operator,curNum));
+    })
+
+clearBtn.addEventListener('click', function(){
+    preNum = '';
+    operator = '';
+    curNum = '';
+    console.log(preNum,operator,curNum);
+    display(onScreen(preNum,operator,curNum));
+    })
+
 function updateCurNum(input){
+    if(curNum.length >=10){
+        return;
+    }
     if (input === '.'){
         if(!curNum){
             curNum = '0.';
@@ -23,13 +61,8 @@ function updateCurNum(input){
         }else{
             curNum = input;
         }
-    }   
+    }  
 };
-
-function updateOpe(input){
-operator = input;
-};
-
 
 
 function calculate(){
@@ -52,9 +85,9 @@ function calculate(){
 function updatePreNum(){
 if(curNum){
     if(!operator||!preNum){
-    preNum = (1*curNum).toFixed(6)*10/10;
+    preNum = (100000*curNum).toFixed()/100000;
     }else{
-    preNum= calculate().toFixed(6)*10/10;
+    preNum= (calculate()*100000).toFixed()/100000;
     };
 };}
 
@@ -80,34 +113,7 @@ function onScreen(num1,operator,num2){
     }
 }
 
-enterNum.addEventListener('click',function(){
-let n = prompt('number');
-updateCurNum(n);
-console.log(preNum,operator,curNum);
-display(onScreen(preNum,operator,curNum));
-});
 
-enterOpe.addEventListener('click',function(){
-let n = prompt('operator');
-updatePreNum();
-updateOpe(n);
-curNum = '';
-console.log(preNum,operator,curNum);
-display(onScreen(preNum,operator,curNum));
-})
 
-getResult.addEventListener('click',function(){
-updatePreNum();
-operator = '';
-curNum = '';
-console.log(preNum,operator,curNum);
-display(onScreen(preNum,operator,curNum));
-})
 
-clearBtn.addEventListener('click', function(){
-preNum = '';
-operator = '';
-curNum = '';
-console.log(preNum,operator,curNum);
-display(onScreen(preNum,operator,curNum));
-})
+
