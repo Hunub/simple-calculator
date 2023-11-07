@@ -3,9 +3,96 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>  
+    <style>
+        #calculator {
+            width: 460px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #screen {
+            box-sizing: border-box;
+            width: 430px;
+            height: 120px;
+            padding: 0 20px;
+            background-color: cornflowerblue;
+        }
+        #display {
+            display: block;
+            text-align: right;
+            font-size: 80px;
+            line-height: 120px;
+        }
+        #control-panel {
+            display: flex;
+            width: 430px;
+            margin-top: 20px;
+        }
+        #left-panel {
+            width: 340px;
+            display: flex;
+            flex-wrap: wrap-reverse;
+            gap: 10px 10px;
+        }
+        #right-panel {
+            width: 100px;
+            margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .button { 
+            box-sizing: border-box;
+            text-align: center;
+            width: 100px;
+            height: 60px;
+            border: solid 2px burlywood;
+            background-color: bisque;
+            font-size: 30px;
+            line-height: 60px;
+        } 
+        .long.button {
+            width: 210px;
+        }
+        .tall.button {
+            height: 130px;
+            line-height: 130px;
+        }
+        .button:hover {
+            background-color: yellow;
+        }
+
+    </style>
 </head>
 <body>
-    <t1 id="display"></t1>
+    <div id="calculator">
+        <div id="screen">
+            <t1 id="display"></t1>
+        </div>
+        <div id="control-panel">
+            <div id="left-panel">
+                <div class="0 long button">0</div>
+                <div class="dot button">.</div>
+                <div class="1 button">1</div>
+                <div class="2 button">2</div>
+                <div class="3 button">3</div>
+                <div class="4 button">4</div>
+                <div class="5 button">5</div>
+                <div class="6 button">6</div>
+                <div class="7 button">7</div>
+                <div class="8 button">8</div>
+                <div class="9 button">9</div>
+                <div class="clear button">C</div>
+                <div class="division button">÷</div>
+                <div class="multiply button">×</div>
+            </div>
+            <div id="right-panel">
+                <div class="minus button">-</div>
+                <div class="plus tall button">+</div>
+                <div class="equal tall button">=</div>
+            </div>
+        </div>
+    </div>
     <button id="numBtn">enter number</button>
     <button id="opeBtn">enter operator</button>
     <button id="equBtn">calculate</button>
